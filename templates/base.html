@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <!-- for mobile-friendly pages -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Eden Liu & Julie Lely" content="">
+    <title>{{ page_title }}</title>
+    <!-- <link href="{{url_for('static', filename = 'style.css')}}" rel='stylesheet'> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="jquery-3.6.0.min.js"></script> 
+</head>
+
+<body>
+
+<main>
+
+{% block navbar %}
+<nav>
+    <a href="{{ url_for('index') }}">
+        <button class="nav-btn">HOME</button>
+    </a>
+</nav>
+{% endblock %}
+
+<div class="header-container">
+{% block header %}
+<!-- insert title of page -->
+{% endblock %}
+</div>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div id="messages">
+    {% for msg in messages %}
+    <p>{{msg}}</p>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+{% block main_content %}
+<!-- put main content here -->
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+{% block end_scripts %}
+{% endblock %}
+
+</main>
+
+</body>
+</html>
