@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block header %}
+<h1>RESULTS</h1>
+{% endblock %}
+
+{% block main_content %}
+
+<h2  style="margin: auto; text-align:center; font-weight:bolder">These are your top matched majors</h2>
+<h2  style="margin: auto; text-align:center; ">See what % of classes you've taken of the available department courses!</h2>
+
+<ul>
+<div class="flex-container" id="myModal-flex">
+    {% for major in results %}
+
+        <div class="major-container">
+            <h2 class="major-name">{{ major[0] }}</h2>
+            <div style="position: relative;">
+                <div class="skill-container">
+                    <div class="skills" style="width: {{major[3]}}%; background-color: #04AA6D; border-radius: 10px;">{{major[3]}}%</div>
+                </div>
+                <button class="modal-btn">See More</button>
+            </div>
+        </div>
+    {% endfor %}
+
+    <!-- The Modal -->
+    {% for major in results %}
+        <div id="myModal-{{major[0]}}" class="modal">
+            <!-- Modal content -->  
+            <div class="modal-content">
+                <div class="close"><span class="close-{{ major[0] }}">&times;</span></div>
+                <h2 class="major-name">{{ major[0] }}</h2>
+                <div class="flex-container-modal">
+                    <div class="course-div">
+                        <h3>Courses You Have Taken</h3>
+                        {% for course in course_matches %}
+                            {% if major[0] == course[1] %}
+                                <ul class="listed-courses">{{ course[0] }}</ul>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="course-div">
+                        <h3>Courses You Can Take</h3>
+                            {% for major_key in courses_to_take_dict %}
+                                {% if major[0] == major_key %}
+                                <div style="overflow:scroll; height: 25vw;">
+                                    {% for c in courses_to_take_dict[major_key]%}
+                                    <div class="popup">
+                                    <ul class="listed-courses">{{ c[2] }}
+                                        <span>
+                                            <h2>{{ c[0] }} {{ c[1] }}</h2><br>
+                                            <ul>
+                                                <li>Units: {{ c[6]}} </li>
+                                                <li>Max. Enrollment: {{ c[7]}} </li>
+                                                <li>Prereqs.: {{ c[8]}} </li>
+                                                <li>Instructor: {{ c[9]}} </li>
+                                                <li>Dist. Req.: {{ c[10]}} </li>
+                                                <li>Sem. Typically Offered: {{ c[11]}} </li>
+                                                <li>Sem. Offered This Year: {{ c[12]}} </li>
+                                            </ul>
+                                        </span>
+                                    </ul>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+
+    <script>
+        $("#myModal-flex").one().on('click','button', function (event) {
+            // When the user clicks the button, open the modal 
+            var clickee = event.target;
+            majorName = clickee.parentNode.parentNode.getElementsByClassName('major-name')[0].innerHTML
+            // Get the modal
+            var modal = document.getElementById('myModal-'+majorName);
+            modal.style.display = "block";
+            // Get the button that opens the modal
+            var btn = document.getElementById("modal-btn");
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close-"+majorName)[0];
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                modal.style.display = "none";
+                }
+            }
+        });
+    </script>
+</div>
+</ul>
+
+
+{% endblock %}

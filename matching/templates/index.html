@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block header %}
+<h1>WELLESLEY MAJOR MATCHING</h1>
+<h2>Enter in courses to see the major requirements you have fulfilled! The order does not matter.</h2>
+{% endblock %}
+
+{% block main_content %}
+<form method="POST" action="{{ url_for('index') }}">
+    <div class="flex-container">
+        <!-- YEAR 1 (8 courses) -->
+        <div class="flex-form-container">
+            <h2>YEAR 1</h2>
+            <div class="year-1">
+                {% for i in range(8) %}
+                <div class="class-input">
+                    <label for="dept-{{i}}" style="padding-right:10px">Dept</label>
+                    <select name="dept-{{i}}" id="dept-{{i}}" style="color: black;">
+                        <option value="dept">Select</option>
+                        {% for dept in depts %}
+                            <option value="{{dept}}">{{dept}}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <label for="cnum-{{i}}" style="padding-left:10px">Course #</label>
+                    <input type="text" name="cnum-{{i}}" id="cnum-{{i}}" placeholder="Type">
+                    
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- YEAR 2 (8 courses) -->
+        <div class="flex-form-container">
+            <h2>YEAR 2</h2>
+            <div class="year-2">
+                {% for i in range(8,16) %}
+                <div class="class-input">
+                    <label for="dept-{{i}}" style="padding-right:10px">Dept</label>
+                    <select name="dept-{{i}}" id="dept-{{i}}" style="color: black;">
+                        <option value="dept">Select</option>
+                        {% for dept in depts %}
+                            <option value="{{dept}}">{{dept}}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <label for="cnum-{{i}}" style="padding-left:10px">Course #</label>
+                    <input type="text" name="cnum-{{i}}" id="cnum-{{i}}" placeholder="Type">
+                    
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- YEAR 3 (8 courses) -->
+        <div class="flex-form-container">
+            <h2>YEAR 3</h2>
+            <div class="year-3">
+                {% for i in range(16,24) %}
+                <div class="class-input">
+                    <label for="dept-{{i}}" style="padding-right:10px">Dept</label>
+                    <select name="dept-{{i}}" id="dept-{{i}}" style="color: black;">
+                        <option value="dept">Select</option>
+                        {% for dept in depts %}
+                            <option value="{{dept}}">{{dept}}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <label for="cnum-{{i}}" style="padding-left:10px">Course #</label>
+                    <input type="text" name="cnum-{{i}}" id="cnum-{{i}}" placeholder="Type">
+                    
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+        <!-- YEAR 4 (8 courses) -->
+        <div class="flex-form-container">
+            <h2>YEAR 4</h2>
+            <div class="year-4">
+                {% for i in range(24, 32) %}
+                <div class="class-input">
+                    <label for="dept-{{i}}" style="padding-right:10px">Dept</label>
+                    <select name="dept-{{i}}" id="dept-{{i}}" style="color: black;">
+                        <option value="dept">Select</option>
+                        {% for dept in depts %}
+                            <option value="{{dept}}">{{dept}}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <label for="cnum-{{i}}" style="padding-left:10px">Course #</label>
+                    <input type="text" name="cnum-{{i}}" id="cnum-{{i}}" placeholder="Type">
+                    
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="submit-btn"><input type='submit' value='Match Me!'> </div>
+</form>
+
+<p style="margin-top:25px; color: rgb(95, 94, 94); text-align: center;">DISCLAIMERS: No summer courses, cross-registered courses, and only 32 course slots available</p>
+<p style="margin-top:25px; color: rgb(95, 94, 94); text-align: center;">If you have any questions or feedback, please use our contact form!</p>
+{% endblock %}

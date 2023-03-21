@@ -1,0 +1,25 @@
+Metadata-Version: 2.1
+Name: pymbar
+Version: 3.0.5
+Summary: Python implementation of the multistate Bennett acceptance ratio (MBAR) method.
+Home-page: http://github.com/choderalab/pymbar
+Author: Levi N. Naden and Michael R. Shirts and John D. Chodera
+Author-email: levi.naden@choderalab.org, michael.shirts@virginia.edu, john.chodera@choderalab.org
+License: MIT
+Download-URL: http://github.com/choderalab/pymbar
+Platform: Linux
+Platform: Mac OS X
+Platform: Windows
+Requires: numpy
+Requires: scipy
+Requires: nose
+Requires: numexpr
+
+
+Pymbar (https://simtk.org/home/pymbar) is a library
+that provides tools for optimally combining simulations
+from multiple thermodynamic states using maximum likelihood
+methods to compute free energies (normalization constants)
+and expectation values from all of the samples simultaneously.
+
+

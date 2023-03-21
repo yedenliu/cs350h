@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# copies the cs304dbi.py file from the course account to your
+# activated virtual environment's site-packages folder.
+
+src="/home/cs304/pub/downloads/pymysql/cs304dbi.py"
+venv=${VIRTUAL_ENV}
+
+if [ ! -f "$src" ]; then
+    echo "Couldn't find source file $src"
+    echo "Contact Scott for help"
+    exit
+fi
+
+if [ -z "$venv" ]; then
+    echo "Couldn't find VIRTUAL_ENV; did you activate it?"
+    exit
+fi
+
+dst="$venv/lib/python3.6/site-packages"
+
+if [ ! -d "$dst" ]; then
+    echo "Couldn't find destination $dst"
+    echo "Contact Scott for help"
+    exit
+fi
+
+# if all is well, this should work
+cp $src $dst
