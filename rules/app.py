@@ -38,6 +38,9 @@ def index():
             abbrev_2 = request.form.get('abbrev_2')
             print(abbrev_2)
             two_levels = get_two_level(conn, abbrev_2)
+            # this will be a json file 
+            # use ajax 
+            # return a json 
             return render_template('index.html', page_title='Add Rule',
                                     two_levels = two_levels)
         
