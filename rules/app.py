@@ -14,27 +14,27 @@ from prepared_queries import *
 # ==============================================================================
 #   Routing functions
 # ==============================================================================
-@app.route('/', methods=['GET'])
+@app.route('/')
 def index():
     return render_template('index.html', page_title='Add Rule')
 
-@app.route('/200levels/<dept>', methods=['GET'])
+@app.route('/200levels/<dept>')
 def add200(dept):
     '''
     Routing function for 200-level quick add
     '''
     conn = dbi.connect()
-    two_levels = get_two_level(conn, dept) 
-    return jsonify(two_levels = two_levels)
+    level200 = get_two_level(conn, dept) 
+    return jsonify(level200 = level200)
    
-@app.route('/300levels/<dept>', methods=['GET'])
+@app.route('/300levels/<dept>')
 def add300(dept):
     '''
     Routing function for 300-level quick add
     '''
     conn = dbi.connect()
-    three_levels = get_three_level(conn, dept) 
-    return jsonify(three_levels = three_levels)
+    level300 = get_three_level(conn, dept) 
+    return jsonify(level300 = level300)
    
 # @app.route('/add', methods=['POST'])
 # def add(dept_json):
