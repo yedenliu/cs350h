@@ -14,66 +14,31 @@ from prepared_queries import *
 # ==============================================================================
 #   Routing functions
 # ==============================================================================
-@app.route('/', methods=['GET','POST'])
+@app.route('/', methods=['GET'])
 def index():
+    return render_template('index.html', page_title='Add Rule')
+
+@app.route('/200levels/<dept>', methods=['GET'])
+def add200(dept):
+    '''
+    Routing function for 200-level quick add
+    '''
     conn = dbi.connect()
-    if request.method == 'GET':
-        return render_template('index.html', page_title='Add Rule')
-    else:
-        arg = []
-        description = request.form.get('description') 
-        nfrom = request.form.get('op')
-        op = 'nfrom-' + nfrom
-        print(request.form['submit'])
-        
-        # if request.form['submit'] == 'add': # BUGGY!
-        #     abbrev = request.form.get('abbrev')
-        #     cnum = request.form.get('cnum')
-        #     # need to create arg 
-        #     arg.append([str(abbrev) + ' ' + str(cnum)])
-        #     return render_template('index.html', page_title='Add Rule',
-        #                        arg = arg)
-        
-        if request.form['submit'] == '200-level':
-            abbrev_2 = request.form.get('abbrev_2')
-            print(abbrev_2)
-            two_levels = get_two_level(conn, abbrev_2)
-            # this will be a json file 
-            # use ajax 
-            # return a json 
-            return render_template('index.html', page_title='Add Rule',
-                                    two_levels = two_levels)
-        
-        if request.form['submit'] == '300-level':
-            abbrev_3 = request.form.get('abbrev_3')
-            print(abbrev_3)
-            three_levels = get_three_level(conn, abbrev_3)
-            return render_template('index.html', page_title='Add Rule',
-                                    three_levels = three_levels)
-            
-        # abbrev = request.form.get('abbrev')
-        # cnum = request.form.get('cnum')
-        # # need to create arg 
-        # arg = [str(abbrev) + ' ' + str(cnum)]
-
-        
-        # 1) construct a dictionary in the browser (front-end), serialize it 
-        # 2) hidden form input, normal 
-        # <input type="hidden" value="" name="course_list">
-        #
-        
-        # Create JSON
-        json = dict()
-        json['description'] = description
-        json['op'] = op
-        json['arg'] = arg
-
-        # TESTING
-
-        return render_template('index.html', page_title='Add Rule',
-                               json = json,
-                               arg = arg)
-
+    two_levels = get_two_level(conn, dept) 
+    return jsonify(two_levels = two_levels)
+   
+@app.route('/300levels/<dept>', methods=['GET'])
+def add300(dept):
+    '''
+    Routing function for 300-level quick add
+    '''
+    conn = dbi.connect()
+    three_levels = get_three_level(conn, dept) 
+    return jsonify(three_levels = three_levels)
+   
+# @app.route('/add', methods=['POST'])
+# def add(dept_json):
+#     return null
 
 ################################################################################
 @app.before_first_request
