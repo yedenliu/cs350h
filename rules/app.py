@@ -16,7 +16,10 @@ from prepared_queries import *
 # ==============================================================================
 @app.route('/')
 def index():
-    return render_template('index.html', page_title='Add Rule')
+    conn = dbi.connect()
+    depts = get_abbrev(conn)
+    return render_template('index.html', page_title='Add Rule',
+                           depts = depts)
 
 @app.route('/200levels/<dept>')
 def add200(dept):

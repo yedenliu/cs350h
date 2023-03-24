@@ -51,7 +51,13 @@
                             <option value="200">All 200-level</option>
                             <option value="300">All 300-level</option>
                           </select>
-                        <input type="text" id="batch-add-dept" name="batch-add-dept" placeholder="Dept.">
+                        <input id="batch-add-dept" name="batch-add-dept" placeholder="Dept." list="departments">
+                        <datalist id="departments">
+                            {% for d in depts %}
+                            <option value="{{ d }}">
+                            {% endfor %}
+                        </datalist>
+
                         <button id="batch-add-button">Add Class</button>
                     </div>
                 </div>
