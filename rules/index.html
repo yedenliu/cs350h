@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="jquery-3.6.0.min.js"></script> 
+    <meta name=author content="Julie Lely & Eden Liu">
+    <title>{{ page_title }}</title>
+</head>
+<body>
+
+    <div id="add-rule-page">
+        <section id="add-rule-container">
+            <h1>Add Rule</h1>
+            <div class="form-inputs">
+
+                <div id="requirement-container">
+                    <div>
+                        <div class="tooltip-header">
+                            <label for="rdesc">Requirement Description</label>
+                            <div>(ICON)</div>
+                        </div>
+                        <p class="subheader">This is a short descriptor of the requirement.</p>
+                    </div>
+                    <input type="text" id="rdesc" name="rdesc" placeholder="Introductory Sequence">
+                </div>
+
+                <div>
+                    <label for="rdesc">How many classes are needed to fulfill this rule?</label>
+                    <input type="text" id="rnum" name="rnum" placeholder="3">
+                </div>
+
+                <div>
+                    <label for="rdesc">What classes count towards this rule</label>
+                    <div class="input-button">
+                        <input type="text" id="add-class" name="add-class" placeholder="CS 111">
+                        <button id="add-class-button">Add Class</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="rdesc">Batch add classes</label>
+                    <div class="input-button">
+                        <select name="levels" id="class-levels">
+                            <option value="200">All 200-level</option>
+                            <option value="300">All 300-level</option>
+                          </select>
+                        <input type="text" id="batch-add-dept" name="batch-add-dept" placeholder="Dept.">
+                        <button id="batch-add-button">Add Class</button>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Courses</h3>
+                    <div id="added-courses-container">
+                        <div id="courses-empty-state-container">
+                            <h3>Courses Empty</h3>
+                            <p class="subheader">Your added courses will show up here. Use the form at the top to add classes</p>
+                        </div>
+                        <div id="added-courses-section">
+                        </div>
+                    </div>
+                </div>
+
+                <button>Add Rule</button>
+            </div>
+        </section>
+        <div class="divider"></div>
+        <section id="rule-display">
+            <div id="debug"></div>
+        </section>
+    </div>
+
+<hr>
+<h1>DEBUGGING</h1>
+<p>{{ two_levels }}</p>
+<!-- JavaScript at the bottom -->
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="scripts/course-component.js"></script>
+<script src="scripts/add-courses.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cs.wellesley.edu/~anderson/js/bounds/bounds-plugin.js"></script>
+<script src="https://cs.wellesley.edu/~cs204/assignments/project/example.js"></script>
+
+</body>
+</html>
