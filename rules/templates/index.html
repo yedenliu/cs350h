@@ -28,18 +28,18 @@
                         </div>
                         <p class="subheader">This is a short descriptor of the requirement.</p>
                     </div>
-                    <input type="text" id="rdesc" name="rdesc" placeholder="Introductory Sequence">
+                    <input type="text" id="rdesc" name="rdesc" placeholder="e.g., Introductory Sequence">
                 </div>
 
                 <div>
                     <label for="rdesc">How many classes are needed to fulfill this rule?</label>
-                    <input type="text" id="rnum" name="rnum" placeholder="3">
+                    <input type="text" id="rnum" name="rnum" placeholder="e.g., 3">
                 </div>
 
                 <div>
                     <label for="rdesc">What classes count towards this rule</label>
                     <div class="input-button">
-                        <input type="text" id="add-class" name="add-class" placeholder="CS 111">
+                        <input type="text" id="add-class" name="add-class" placeholder="e.g., CS 111">
                         <button id="add-class-button">Add Class</button>
                     </div>
                 </div>
@@ -51,7 +51,8 @@
                             <option value="200">All 200-level</option>
                             <option value="300">All 300-level</option>
                           </select>
-                        <input id="batch-add-dept" name="batch-add-dept" placeholder="Dept." list="departments">
+                        
+                          <input id="batch-add-dept" name="batch-add-dept" placeholder="Type dept. abbreviation" list="departments">
                         <datalist id="departments">
                             {% for d in depts %}
                             <option value="{{ d }}">
@@ -89,8 +90,7 @@
 <script src="{{url_for('static', filename = 'scripts/course-component.js')}}"></script>
 <script src="{{url_for('static', filename = 'scripts/add-courses.js')}}"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cs.wellesley.edu/~anderson/js/bounds/bounds-plugin.js"></script>
-<script src="https://cs.wellesley.edu/~cs204/assignments/project/example.js"></script>
-
+<!-- <script src="https://cs.wellesley.edu/~anderson/js/bounds/bounds-plugin.js"></script>
+<script src="https://cs.wellesley.edu/~cs204/assignments/project/example.js"></script> -->
 </body>
 </html>

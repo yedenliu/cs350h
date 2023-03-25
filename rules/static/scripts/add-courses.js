@@ -42,19 +42,17 @@ $("#batch-add-button").on("click", function(event) {
     var clickee = event.target;
     var dept = $("#batch-add-dept").val();
     var level = $('#class-levels option:selected').val();
-    console.log("dept: ", dept, "level: ", level);
 
     // Call Query
-    $.get( "/" + level + "levels/" + dept, function( data ) {
+    // need a prefix for the url 
+    var base_url = window.location.pathname;
+    $.get( base_url + "/" + level + "levels/" + dept, function( data ) { 
         $( "#debug" ).html( data );
-        alert( "Load was performed." );
+        // alert( "Load was performed." );
 
         $("#courses-empty-state-container").css("display", "none");
-        console.log(data)
         var classArray = data['level' + level]
-        console.log(classArray)
         classArray.forEach(function(course){
-            console.log('course: ', course);
             var courseName = course[0] + ' ' + course[1];
             var component = new courseChip(course);
             component.addToPage("added-courses-section");
