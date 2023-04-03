@@ -157,6 +157,7 @@ button {
 }
 
 .course-chip div {
+    max-width: 38px;
     font-size: 13px;
     font-weight: 500;
     line-height: 18px;
