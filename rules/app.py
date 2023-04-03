@@ -19,6 +19,7 @@ def index():
     conn = dbi.connect()
     depts = get_abbrev(conn)
     courses = get_courses(conn)
+    print(courses)
     return render_template('index.html', page_title='Major Requirements',
                            depts = depts,
                            courses = courses)

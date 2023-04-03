@@ -10,13 +10,13 @@ def get_courses(conn):
             '''
     curs.execute(sql)
     courseTups = curs.fetchall()
-    # courseList = [i[0] + i[] for i in courseTups]
-    return courseTups
+    courseList = [i[0] + ' ' + i[1] for i in courseTups]
+    return courseList
 
 
 def get_abbrev(conn):
     curs = dbi.cursor(conn)
-    sql =   ''' select distinct c 
+    sql =   ''' select distinct dept 
                 from courses 
                 where dept <> ""
                 order by dept asc 
