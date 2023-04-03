@@ -1,4 +1,5 @@
 var courseList = [''];
+var rulesList = [''];
 var rdesc = $("#rdesc").val();
 var op = $("#rnum").val();
 
@@ -62,6 +63,21 @@ $("#batch-add-button").on("click", function(event) {
         });
         $("#batch-add-dept").val('');
     });
+})
+
+/**
+ * event handler for button that adds a rule
+ * by building a json and showing added courses on the right side
+ */
+$("#add-rule").on("click", function(event) {
+    var ruleDict = {
+        "description": rdesc,
+        "op": "nfrom-" + op,
+        "arg": courseList
+    };
+
+    /** Append course to list */
+    courseList.push(course);
 })
 /** Create function that formats class number
  *  Also add course number to list
