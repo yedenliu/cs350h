@@ -39,7 +39,12 @@
                 <div>
                     <label for="rdesc">What classes count towards this rule</label>
                     <div class="input-button">
-                        <input type="text" id="add-class" name="add-class" placeholder="e.g., CS 111">
+                        <input id="add-class" name="add-class" placeholder="e.g., CS 111" list="courses">
+                        <datalist id="courses">
+                            {% for c in courses %}
+                            <option value="{{ c }}">
+                            {% endfor %}
+                        </datalist>
                         <button id="add-class-button">Add Class</button>
                     </div>
                 </div>
@@ -52,7 +57,7 @@
                             <option value="300">All 300-level</option>
                           </select>
                         
-                          <input id="batch-add-dept" name="batch-add-dept" placeholder="Type dept. abbreviation" list="departments">
+                        <input id="batch-add-dept" name="batch-add-dept" placeholder="Type dept. abbreviation" list="departments">
                         <datalist id="departments">
                             {% for d in depts %}
                             <option value="{{ d }}">

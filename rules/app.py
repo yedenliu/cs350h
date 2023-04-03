@@ -18,8 +18,10 @@ from prepared_queries import *
 def index():
     conn = dbi.connect()
     depts = get_abbrev(conn)
-    return render_template('index.html', page_title='Add Rule',
-                           depts = depts)
+    courses = get_courses(conn)
+    return render_template('index.html', page_title='Major Requirements',
+                           depts = depts,
+                           courses = courses)
 
 @app.route('/200levels/<dept>')
 def add200(dept):

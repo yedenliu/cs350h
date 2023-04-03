@@ -1,8 +1,22 @@
 import cs304dbi as dbi
 
+def get_courses(conn):
+    curs = dbi.cursor(conn)
+    sql =   ''' select distinct dept, cnum 
+                from courses 
+                where dept <> ""
+                and cnum <> ""
+                order by dept asc 
+            '''
+    curs.execute(sql)
+    courseTups = curs.fetchall()
+    # courseList = [i[0] + i[] for i in courseTups]
+    return courseTups
+
+
 def get_abbrev(conn):
     curs = dbi.cursor(conn)
-    sql =   ''' select distinct dept 
+    sql =   ''' select distinct c 
                 from courses 
                 where dept <> ""
                 order by dept asc 
