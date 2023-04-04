@@ -14,16 +14,29 @@ from prepared_queries import *
 # ==============================================================================
 #   Routing functions
 # ==============================================================================
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def index():
+    conn = dbi.connect()
+    if request.method == 'GET':
+        depts = get_abbrev(conn)
+        return render_template('index.html', page_title='Major Requirements',
+                           depts = depts)
+    else:
+        deptName = request.form['deptName']
+        return redirect(url_for('deptPage', dept = deptName))
+
+        
+
+@app.route('/<dept>')
+def deptPage(dept):
     conn = dbi.connect()
     depts = get_abbrev(conn)
     courses = get_courses(conn)
-    print(courses)
-    return render_template('index.html', page_title='Major Requirements',
+    rules = get_rules(conn, dept)
+    return render_template('rules.html', page_title='Add Rules',
                            depts = depts,
-                           courses = courses)
-
+                           courses = courses,
+                           rules = rules)
 @app.route('/200levels/<dept>')
 def add200(dept):
     '''
@@ -42,9 +55,17 @@ def add300(dept):
     level300 = get_three_level(conn, dept) 
     return jsonify(level300 = level300)
    
-# @app.route('/add', methods=['POST'])
-# def add(dept_json):
-#     return null
+@app.route('/submit/<dept>', methods=['POST'])
+def submit(dept):
+    '''
+    Routing function for submitting a major into the database
+    '''
+    conn = dbi.connect()
+    json = request.form['majorJSON']
+    deptName = json['deptName']
+    rules = json['rules']
+    add_major(conn, deptName, rules)
+    return redirect(url_for('index'))
 
 ################################################################################
 @app.before_first_request

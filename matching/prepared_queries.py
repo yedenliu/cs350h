@@ -19,6 +19,15 @@ def get_depts(conn):
     deptsList = [i[0] for i in deptsTups]
     return deptsList
 
+def get_rules(conn, dept):
+    curs = dbi.cursor(conn)
+    sql =   ''' select rules
+                from jsons 
+                where dept = %s
+            '''
+    curs.execute(sql, [dept])
+    return curs.fetchall()
+
 def find_cid(conn, dept, cnum):
     curs = dbi.cursor(conn)
     sql = '''   select cid from courses

@@ -10,9 +10,17 @@ def get_courses(conn):
             '''
     curs.execute(sql)
     courseTups = curs.fetchall()
-    courseList = [i[0] + ' ' + i[1] for i in courseTups]
+    courseList = [i[0] + i[1] for i in courseTups]
     return courseList
 
+def get_rules(conn, dept):
+    curs = dbi.cursor(conn)
+    sql =   ''' select rules
+                from jsons 
+                where dept = %s
+            '''
+    curs.execute(sql, [dept])
+    return curs.fetchall()
 
 def get_abbrev(conn):
     curs = dbi.cursor(conn)
@@ -98,3 +106,15 @@ def get_three_level(conn, abbrev):
             '''
     curs.execute(sql, [abbrev, level])
     return curs.fetchall()
+
+
+def add_major(conn, deptName, rules):
+    '''
+    Adds major and its JSON information into Major Match database
+    '''
+    curs = dbi.cursor(conn)
+    sql =   ''' insert into jsons (dept, rules)
+                values (%s, %s)
+            '''
+    curs.execute(sql, [deptName, rules])
+    conn.commit()
