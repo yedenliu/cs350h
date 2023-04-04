@@ -124,7 +124,7 @@ button {
     justify-content: space-between;
     align-items: flex-start;
     gap: 54px;
-        width: 80%;
+    width: 85%;
 
 }
 
@@ -163,6 +163,7 @@ button {
     line-height: 18px;
     letter-spacing: 0px;
     text-align: center;
+    white-space: nowrap;
 }
 
 .course-chip-remove {
