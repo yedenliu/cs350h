@@ -10,7 +10,7 @@ def get_courses(conn):
             '''
     curs.execute(sql)
     courseTups = curs.fetchall()
-    courseList = [i[0] + ' ' + i[1] for i in courseTups]
+    courseList = [i[0] + i[1] for i in courseTups]
     return courseList
 
 

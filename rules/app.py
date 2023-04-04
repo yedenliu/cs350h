@@ -19,7 +19,6 @@ def index():
     conn = dbi.connect()
     depts = get_abbrev(conn)
     courses = get_courses(conn)
-    print(courses)
     return render_template('index.html', page_title='Major Requirements',
                            depts = depts,
                            courses = courses)
@@ -42,9 +41,15 @@ def add300(dept):
     level300 = get_three_level(conn, dept) 
     return jsonify(level300 = level300)
    
-# @app.route('/add', methods=['POST'])
-# def add(dept_json):
-#     return null
+@app.route('/submit/<dept>', methods=['POST'])
+def submit(dept):
+    '''
+    Routing function for submitting a major into the database
+    '''
+    conn = dbi.connect()
+    json = request.form['majorJSON']
+    # add_major(conn)
+    return redirect(url_for('index'))
 
 ################################################################################
 @app.before_first_request
