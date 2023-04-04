@@ -13,6 +13,14 @@ def get_courses(conn):
     courseList = [i[0] + i[1] for i in courseTups]
     return courseList
 
+def get_rules(conn, dept):
+    curs = dbi.cursor(conn)
+    sql =   ''' select rules
+                from jsons 
+                where dept = %s
+            '''
+    curs.execute(sql, [dept])
+    return curs.fetchall()
 
 def get_abbrev(conn):
     curs = dbi.cursor(conn)
