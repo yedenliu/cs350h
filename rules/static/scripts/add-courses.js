@@ -1,5 +1,5 @@
 var courseList = [''];
-var rulesList = [''];
+var rulesList = [];
 var rdesc = $("#rdesc").val();
 var op = $("#rnum").val();
 
@@ -55,11 +55,11 @@ $("#batch-add-button").on("click", function(event) {
         var classArray = data['level' + level]
         classArray.forEach(function(course){
             var courseName = course[0] + ' ' + course[1];
-            var component = new courseChip(course);
+            var component = new courseChip(courseName);
             component.addToPage("added-courses-section");
 
             /** Append course to list */
-            courseList.push(course);
+            courseList.push(courseName);
         });
         $("#batch-add-dept").val('');
     });
@@ -77,7 +77,7 @@ $("#add-rule").on("click", function(event) {
     };
 
     /** Append course to list */
-    courseList.push(course);
+    rulesList.push(ruleDict);
 })
 /** Create function that formats class number
  *  Also add course number to list
