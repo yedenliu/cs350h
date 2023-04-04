@@ -37,7 +37,7 @@ def deptPage(dept):
                            depts = depts,
                            courses = courses,
                            rules = rules)
-@app.route('/200levels/<dept>')
+@app.route('/<dept>/200levels')
 def add200(dept):
     '''
     Routing function for 200-level quick add
@@ -46,7 +46,7 @@ def add200(dept):
     level200 = get_two_level(conn, dept) 
     return jsonify(level200 = level200)
    
-@app.route('/300levels/<dept>')
+@app.route('/<dept>/300levels')
 def add300(dept):
     '''
     Routing function for 300-level quick add
@@ -55,7 +55,7 @@ def add300(dept):
     level300 = get_three_level(conn, dept) 
     return jsonify(level300 = level300)
    
-@app.route('/submit/<dept>', methods=['POST'])
+@app.route('/<dept>/submit', methods=['POST'])
 def submit(dept):
     '''
     Routing function for submitting a major into the database
