@@ -7,7 +7,7 @@ class ruleBlock {
         // Create container to hold chips
         var $container = $('<div>', {
             'class':'rules-container',
-            'id' : desc.replace(/\s+/g, '') // Use description as ID w/ no spaces
+            'id' : this.desc.replace(/\s+/g, '') // Use description as ID w/ no spaces
         }); 
         
         var $courseContainer = $('<div>', {

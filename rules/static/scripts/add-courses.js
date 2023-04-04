@@ -69,7 +69,7 @@ $("#batch-add-button").on("click", function(event) {
  * event handler for button that adds a rule
  * by building a json and showing added courses on the right side
  */
-$("#add-rule").on("click", function(event) {
+$("#add-rule-button").on("click", function(event) {
     var ruleDict = {
         "description": rdesc,
         "op": "nfrom-" + op,
