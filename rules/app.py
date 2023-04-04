@@ -48,7 +48,9 @@ def submit(dept):
     '''
     conn = dbi.connect()
     json = request.form['majorJSON']
-    # add_major(conn)
+    deptName = json['deptName']
+    rules = json['rules']
+    add_major(conn, deptName, rules)
     return redirect(url_for('index'))
 
 ################################################################################

@@ -98,3 +98,15 @@ def get_three_level(conn, abbrev):
             '''
     curs.execute(sql, [abbrev, level])
     return curs.fetchall()
+
+
+def add_major(conn, deptName, rules):
+    '''
+    Adds major and its JSON information into Major Match database
+    '''
+    curs = dbi.cursor(conn)
+    sql =   ''' insert into jsons (dept, rules)
+                values (%s, %s)
+            '''
+    curs.execute(sql, [deptName, rules])
+    conn.commit()
