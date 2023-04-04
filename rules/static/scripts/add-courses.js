@@ -1,4 +1,4 @@
-var courseList = [''];
+var courseList = [];
 var rulesList = [];
 var rdesc = $("#rdesc").val();
 var op = $("#rnum").val();
@@ -76,9 +76,23 @@ $("#add-rule").on("click", function(event) {
         "arg": courseList
     };
 
-    /** Append course to list */
+    /** Append rules to list of rules */
     rulesList.push(ruleDict);
+    var ruleElt = new ruleBlock(ruleDict);
+    ruleElt.addToPage();
+    console.log("Rule Added!")
 })
+
+$('#submit-major').on("click", function(event) {
+    var dept = $("#dept-name").val();
+    var finalJSON = {
+        "deptName" : dept,
+        "rules": rulesList
+    }
+    
+    $.post("/submit/" + dept, {"majorJSON": finalJSON})
+    alert( "POST was performed." );
+});
 /** Create function that formats class number
  *  Also add course number to list
  */
@@ -88,18 +102,6 @@ $("#add-rule").on("click", function(event) {
 // });
 
 // Get dept from input
-
-// $.get( "/200levels/" + dept, function( data ) {
-//     $( ".result" ).html( data );
-//     alert( "Load was performed." );
-//   });
-
-// Wnen we're ready to post to the database
-// $.post('someURL', 
-//     JOSN.stringify(myVar),
-//     myVar,
-//     function(resp){}
-// );
 /** Create function that formats rules into a list of dictionaries
  */
 function formatRules (){

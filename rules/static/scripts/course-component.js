@@ -19,6 +19,10 @@ class courseChip {
         $("#" + destination).append(this.elt);
      }
 
+    getComponent() {
+        return this.elt;
+    }
+
     remove() {
         $(this.elt).remove();
     }

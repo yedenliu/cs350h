@@ -171,7 +171,7 @@ button {
     width: 20px;
 }
 
-#added-courses-section {
+#added-courses-section, .rules-chip-container {
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(100px, 1fr));
     row-gap: 8px;
