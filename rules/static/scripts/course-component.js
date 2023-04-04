@@ -7,9 +7,9 @@ class courseChip {
         var courseName =  $('<div>'); 
         courseName.html(name);
 
-        var remove = $('<image>', {
+        var remove = $('<img>', {
             'class': 'course-chip-remove',
-            'src':'../images/remove.png'
+            'src':'static/images/remove.png'
         }); 
 
         this.elt.append(courseName).append(remove);

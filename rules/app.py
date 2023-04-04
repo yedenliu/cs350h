@@ -23,20 +23,21 @@ def index():
                            depts = depts)
     else:
         deptName = request.form['deptName']
-        return redirect(url_for('deptPage', dept = deptName))
+        return redirect(url_for('deptPage', deptName = deptName))
 
         
 
-@app.route('/<dept>')
-def deptPage(dept):
+@app.route('/<deptName>')
+def deptPage(deptName):
     conn = dbi.connect()
     depts = get_abbrev(conn)
     courses = get_courses(conn)
-    rules = get_rules(conn, dept)
+    rules = get_rules(conn, deptName)
     return render_template('rules.html', page_title='Add Rules',
                            depts = depts,
                            courses = courses,
                            rules = rules)
+
 @app.route('/200levels/<dept>')
 def add200(dept):
     '''

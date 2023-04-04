@@ -45,8 +45,10 @@ $("#batch-add-button").on("click", function(event) {
     var level = $('#class-levels option:selected').val();
 
     // Call Query
-    // need a prefix for the url 
-    var base_url = window.location.pathname;
+    // need a prefix for the url
+    // FIX!
+    // var base_url = window.location.pathname; 
+    var base_url = '/majormatch-admin'; 
     $.get( base_url + "/" + level + "levels/" + dept, function( data ) { 
         $( "#debug" ).html( data );
         // alert( "Load was performed." );
