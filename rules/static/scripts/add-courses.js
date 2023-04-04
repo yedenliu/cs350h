@@ -47,7 +47,7 @@ $("#batch-add-button").on("click", function(event) {
     // Call Query
     // need a prefix for the url 
     var base_url = window.location.pathname;
-    $.get( base_url + "/" + level + "levels/" + dept, function( data ) { 
+    $.get( base_url + "/" + dept + "/" + level + "levels", function( data ) { 
         $( "#debug" ).html( data );
         // alert( "Load was performed." );
 
