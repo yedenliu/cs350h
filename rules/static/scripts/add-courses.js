@@ -99,7 +99,7 @@ $("#batch-add-button").on("click", function(event) {
         // remove course from HTML
         $chip.remove();
     });
-    
+
     });
 })
 
@@ -140,7 +140,8 @@ $('#submit-major').on("click", function(event) {
         "rules": rulesList
     }
     
-    $.post("/submit/" + dept, {"majorJSON": finalJSON})
+    var base_url = '/majormatch-admin';
+    $.post( base_url + "/submit/" + dept, {"majorJSON": finalJSON})
     alert( "POST was performed." );
 });
 
