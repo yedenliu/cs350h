@@ -11,6 +11,11 @@ app = Flask(__name__)
 import cs304dbi as dbi
 from prepared_queries import *
 
+import logging 
+logging.basicConfig(filename='/students/majormatch/app.log', filemode='w', format='%(levelname)s:%(message)s', level=logging.DEBUG)
+
+import json
+
 # ==============================================================================
 #   Routing functions
 # ==============================================================================
@@ -62,14 +67,20 @@ def submit(dept):
     Routing function for submitting a major into the database
     '''
     conn = dbi.connect()
-    json = request.form['majorJSON']
-    # deptName = json['deptName']
-    rules = json['rules']
-    print('TESTING')
-    print(json)
-    print(dept)
-    print(rules)
-    add_major(conn, dept, rules)
+    logging.debug('TESTING')
+    logging.debug(request.form.keys())
+    
+    string = request.form['majorJSON']
+    majorJSON = json.loads(str(string))
+    logging.debug(type(majorJSON))
+    logging.debug(majorJSON)
+    
+    deptName = majorJSON['deptName']
+    rules = json.dumps(majorJSON['rules'])
+    
+    logging.debug(deptName)
+    logging.debug(rules)
+    add_major(conn, deptName, rules)
     return redirect(url_for('deptPage', deptName = dept))
 
 ################################################################################

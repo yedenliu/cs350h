@@ -145,7 +145,7 @@ $('#submit-major').on("click", function(event) {
     
     var base_url = '/majormatch-admin';
     // var base_url = window.location.pathname;
-    $.post( base_url + "/submit/" + dept, {"majorJSON": finalJSON})
+    $.post( base_url + "/submit/" + dept, {"majorJSON": JSON.stringify(finalJSON)});
     alert( "POST was performed." );
 });
 
