@@ -82,6 +82,24 @@ $("#batch-add-button").on("click", function(event) {
             courseList.push(courseName);
         });
         $("#batch-add-dept").val('');
+
+         /**
+     * event handler to remove course
+     */
+    $(".course-chip-remove").on("click", function(event) {
+        var clickee = event.target;
+        var $chip = $(clickee).closest(".course-chip");
+        var courseName = $chip.find('.course-chip-name').html();
+        console.log("removing: ", courseName);
+
+        console.log("courseList: ", courseList);
+        courseList = courseList.filter(item => item !== courseName)
+        console.log("courseList updated: ", courseList);
+
+        // remove course from HTML
+        $chip.remove();
+    });
+    
     });
 })
 
