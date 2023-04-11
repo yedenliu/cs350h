@@ -1,18 +1,27 @@
 class courseChip {
-    constructor(name) {
+    constructor(name, remove) {
         this.name = name;
         this.elt = $('<div>', {
             'class':'course-chip'
         }); 
-        var courseName =  $('<div>'); 
-        courseName.html(name);
+        var $courseName =  $('<div>',{
+            'class':'course-chip-name'
+        }); 
+        $courseName.html(name);
 
-        var remove = $('<img>', {
+        var $remove = $('<img>', {
             'class': 'course-chip-remove',
             'src':'static/images/remove.png'
         }); 
 
-        this.elt.append(courseName).append(remove);
+        if (remove) {
+            console.log("remove: ", remove);
+            this.elt.append($courseName).append($remove);
+        }
+        else {
+            this.elt.append($courseName);
+        }
+
     }
 
     addToPage(destination) {

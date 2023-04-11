@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Roboto';
-    width: 80%;
+    /* width: 80%; */
     margin: auto;
     margin-top: 54px; /* Change later */
 }
@@ -124,7 +124,8 @@ button {
     justify-content: space-between;
     align-items: flex-start;
     gap: 54px;
-    width: 85%;
+    width: 65%;
+    margin: auto;
 
 }
 
@@ -152,12 +153,12 @@ button {
     flex-direction: row;
     align-items: center;
     gap: 8px;
-    width: fit-content;
+    width: max-content;
     border-radius: 4px;
 }
 
 .course-chip div {
-    max-width: 38px;
+    /* max-width: 38px; */
     font-size: 13px;
     font-weight: 500;
     line-height: 18px;
@@ -173,10 +174,40 @@ button {
 
 #added-courses-section, .rules-chip-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(100px, 1fr));
+    /* grid-template-columns: repeat(auto-fill,minmax(100px, 1fr)); */
+    /* column-gap: 8px; */
+    grid-template-columns: auto auto auto auto;
     row-gap: 8px;
+    column-gap: 8px;
+}
+
+.rules-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#rule-display-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
 /* #added-courses-section > * {
     flex: 1 1 100px;
 }  */
+
+#submit-section {
+    border-top: 1px solid #E0E0E0;
+    box-shadow: 2px -2px 6px 0px #00000014;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding: 36px 0px;
+}
+
+#submit-section > div {
+    display: flex;
+    width: 65%;
+    justify-content: flex-end;
+}

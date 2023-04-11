@@ -27,14 +27,32 @@ function formatClass(course) {
 $("#add-class-button").on("click", function(event) {
     var clickee = event.target;
     var course = $("#add-class").val();
-    var component = new courseChip(course);
+    var component = new courseChip(course, true);
     component.addToPage("added-courses-section");
     $("#courses-empty-state-container").css("display", "none");
     $("#add-class").val('');
 
     /** Append course to list */
     courseList.push(course);
+
+     /**
+     * event handler to remove course
+     */
+    $(".course-chip-remove").on("click", function(event) {
+        var clickee = event.target;
+        var $chip = $(clickee).closest(".course-chip");
+        var courseName = $chip.find('.course-chip-name').html();
+        console.log("removing: ", courseName);
+
+        console.log("courseList: ", courseList);
+        courseList = courseList.filter(item => item !== courseName)
+        console.log("courseList updated: ", courseList);
+
+        // remove course from HTML
+        $chip.remove();
+    });
 })
+
 
 /**
  * event handler for when user batch adds course
@@ -57,7 +75,7 @@ $("#batch-add-button").on("click", function(event) {
         var classArray = data['level' + level]
         classArray.forEach(function(course){
             var courseName = course[0] + ' ' + course[1];
-            var component = new courseChip(courseName);
+            var component = new courseChip(courseName, true);
             component.addToPage("added-courses-section");
 
             /** Append course to list */
@@ -72,6 +90,9 @@ $("#batch-add-button").on("click", function(event) {
  * by building a json and showing added courses on the right side
  */
 $("#add-rule-button").on("click", function(event) {
+    rdesc = $("#rdesc").val();
+    op = $("#rnum").val();
+
     var ruleDict = {
         "description": rdesc,
         "op": "nfrom-" + op,
@@ -83,6 +104,15 @@ $("#add-rule-button").on("click", function(event) {
     var ruleElt = new ruleBlock(ruleDict);
     ruleElt.addToPage();
     console.log("Rule Added!")
+
+    // Clear courses
+    $("#courses-empty-state-container").css("display", "flex");
+    $("#added-courses-section").empty();
+
+    // Reset variables
+    $("#rdesc").val('');
+    $("#rnum").val('');
+    courseList = [];
 })
 
 $('#submit-major').on("click", function(event) {
@@ -95,13 +125,7 @@ $('#submit-major').on("click", function(event) {
     $.post("/submit/" + dept, {"majorJSON": finalJSON})
     alert( "POST was performed." );
 });
-/** Create function that formats class number
- *  Also add course number to list
- */
 
-// $.get('someurl', function(response){
-//     // process the respose
-// });
 
 // Get dept from input
 /** Create function that formats rules into a list of dictionaries
