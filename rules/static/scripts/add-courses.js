@@ -134,7 +134,10 @@ $("#add-rule-button").on("click", function(event) {
 })
 
 $('#submit-major').on("click", function(event) {
-    var dept = $("#dept-name").val();
+    var pathname = window.location.pathname;
+    var pathArray = pathname.split('/');
+    var dept = pathArray[pathArray.length-1];
+    
     var finalJSON = {
         "deptName" : dept,
         "rules": rulesList
