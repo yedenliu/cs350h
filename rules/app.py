@@ -63,10 +63,14 @@ def submit(dept):
     '''
     conn = dbi.connect()
     json = request.form['majorJSON']
-    deptName = json['deptName']
+    # deptName = json['deptName']
     rules = json['rules']
-    add_major(conn, deptName, rules)
-    return redirect(url_for('index'))
+    print('TESTING')
+    print(json)
+    print(dept)
+    print(rules)
+    add_major(conn, dept, rules)
+    return redirect(url_for('deptPage', deptName = dept))
 
 ################################################################################
 @app.before_first_request
@@ -87,3 +91,4 @@ if __name__ == '__main__':
         port = os.getuid()
     app.debug = True
     app.run('0.0.0.0',port)
+ 
