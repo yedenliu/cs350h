@@ -156,7 +156,7 @@ $.get( base_url + "/rules/" + dept, function( data ) {
     var rulesArray = data['rules']
     console.log("rulesArray: ", rulesArray);
     rulesArray.forEach(function(course){
-        var ruleElt = new ruleBlock(el);
+        var ruleElt = new ruleBlock(course);
         ruleElt.addToPage();
     });
 });
