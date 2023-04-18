@@ -61,7 +61,18 @@ def add300(dept):
     conn = dbi.connect()
     level300 = get_three_level(conn, dept) 
     return jsonify(level300 = level300)
-   
+
+
+@app.route('/rules/<dept>')
+def getRules(dept):
+    '''
+    Routing function for rules refresh
+    '''
+    conn = dbi.connect()
+    rulesTups = get_rules(conn, dept)
+    rules = [json.loads(i[0])[0] for i in rulesTups]
+    return jsonify(rules = rules)
+
 @app.route('/submit/<dept>', methods=['POST'])
 def submit(dept):
     '''

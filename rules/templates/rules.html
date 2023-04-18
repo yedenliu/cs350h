@@ -87,11 +87,13 @@
             <div id="debug"></div>
             <div>
                 <h2>Existing rules</h2>
-                <input type="hidden" id="rulesList" value="{{rules}}">
+
+                <input type="hidden" id="pastRules" value="{{rules}}">
+
                 {{rules}}
                 {% for r in rules %}
                 <div class="past-rule">
-                <p>Rule Description: {{ r.description }}</p>
+                <p>Rule Description: <span >{{ r.description }}</span></p>
                 <p>Units required: {{ r.op }}</p>
                 <p>Courses counted: {{ r.arg }}</p>
                 </div>
@@ -99,9 +101,12 @@
 
                 {% endfor %}
             </div>
+            
+            
             <div id="rule-display-container">
 
             </div>
+
         </section>
     </div>
 

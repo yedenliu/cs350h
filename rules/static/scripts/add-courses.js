@@ -160,8 +160,11 @@ function formatRules (){
 
 /** Final formatting for department JSON
  */
-var rulesList = document.getElementById("rulesList").value;
-    rulesList.forEach(function(el){
+var pastRules = document.getElementById("pastRules").value;
+    console.log(pastRules);
+    pastRules = JSON.parse(pastRules);
+    pastRules.forEach(function(el){
         var ruleElt = new ruleBlock(el);
         ruleElt.addToPage();
+       
 });
