@@ -132,7 +132,7 @@ $('#submit-major').on("click", function(event) {
     }
 
     var base_url = '/majormatch-admin';
-    $.post( base_url + "/submit/" + dept, {"majorJSON": finalJSON})
+    $.post( base_url + "/submit/" + dept, {"majorJSON": JSON.stringify(finalJSON)})
     alert( "POST was performed." );
 });
 
@@ -154,12 +154,8 @@ function formatRules (){
 
 $.get( base_url + "/rules/" + dept, function( data ) { 
     rulesList = data['rules']
-    console.log("rulesArray: ", rulesArray);
-<<<<<<< HEAD
-    rulesArray.forEach(function(course){
-=======
+    console.log("rulesList: ", rulesList);
     rulesList.forEach(function(course){
->>>>>>> ddbbff9e807b41bdd811fdf810a05194ffb2b42e
         var ruleElt = new ruleBlock(course);
         ruleElt.addToPage();
     });

@@ -113,8 +113,17 @@ def add_major(conn, deptName, rules):
     Adds major and its JSON information into Major Match database
     '''
     curs = dbi.cursor(conn)
-    sql =   ''' insert into jsons (dept, rules)
-                values (%s, %s)
+    # avoiding duplications
+    sql_1 = '''
+            delete from jsons 
+            where dept = %s
             '''
-    curs.execute(sql, [deptName, rules])
+    curs.execute(sql_1, [deptName, rules])
+    conn.commit()
+    
+    sql_2 = ''' 
+            insert into jsons (dept, rules)
+            values (%s, %s)
+            '''
+    curs.execute(sql_2, [deptName, rules])
     conn.commit()
