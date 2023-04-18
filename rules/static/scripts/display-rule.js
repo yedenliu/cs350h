@@ -1,5 +1,6 @@
 class ruleBlock {
     constructor(ruleDict) {
+        this.dict = ruleDict;
         this.desc = ruleDict['description'];
         this.num = ruleDict['op'];
         this.rulesList = ruleDict['arg'];
@@ -60,8 +61,11 @@ class ruleBlock {
             $container.append($courseContainer);  
         }
 
-        $($container).on("click", '.rules-remove', function(event) {
+        $($container).on("click", '.rules-remove', event => {
            this.removeRule();
+           // Update rules var
+           rulesList = rulesList.filter(item => item !== ruleDict);
+           console.log("rulesList in display-ruleL ", rulesList);
         });
 
         this.elt = $container;

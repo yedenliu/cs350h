@@ -3,6 +3,10 @@ var rulesList = [];
 var rdesc = $("#rdesc").val();
 var op = $("#rnum").val();
 
+var base_url = '/majormatch-admin'; 
+var pathname = window.location.pathname;
+var pathArray = pathname.split('/');
+var dept = pathArray[pathArray.length-1];
 
 function isCharNumber(c) {
     return c >= '0' && c <= '9';
@@ -82,24 +86,6 @@ $("#batch-add-button").on("click", function(event) {
             courseList.push(courseName);
         });
         $("#batch-add-dept").val('');
-
-         /**
-     * event handler to remove course
-     */
-    $(".course-chip-remove").on("click", function(event) {
-        var clickee = event.target;
-        var $chip = $(clickee).closest(".course-chip");
-        var courseName = $chip.find('.course-chip-name').html();
-        console.log("removing: ", courseName);
-
-        console.log("courseList: ", courseList);
-        courseList = courseList.filter(item => item !== courseName)
-        console.log("courseList updated: ", courseList);
-
-        // remove course from HTML
-        $chip.remove();
-    });
-
     });
 })
 
@@ -110,6 +96,8 @@ $("#batch-add-button").on("click", function(event) {
 $("#add-rule-button").on("click", function(event) {
     rdesc = $("#rdesc").val();
     op = $("#rnum").val();
+
+    // if ((rdesc.length == 0) || (op.length == 0))
 
     var ruleDict = {
         "description": rdesc,
@@ -134,18 +122,17 @@ $("#add-rule-button").on("click", function(event) {
 })
 
 $('#submit-major').on("click", function(event) {
-    var pathname = window.location.pathname;
-    var pathArray = pathname.split('/');
-    var dept = pathArray[pathArray.length-1];
-    
+    // var pathname = window.location.pathname;
+    // var pathArray = pathname.split('/');
+    // var dept = pathArray[pathArray.length-1];
+
     var finalJSON = {
         "deptName" : dept,
         "rules": rulesList
     }
-    
+
     var base_url = '/majormatch-admin';
-    // var base_url = window.location.pathname;
-    $.post( base_url + "/submit/" + dept, {"majorJSON": JSON.stringify(finalJSON)});
+    $.post( base_url + "/submit/" + dept, {"majorJSON": finalJSON})
     alert( "POST was performed." );
 });
 
@@ -158,13 +145,20 @@ function formatRules (){
     // EVENT LISTNER
 }
 
-/** Final formatting for department JSON
- */
-var pastRules = document.getElementById("pastRules").value;
-    console.log(pastRules);
-    pastRules = JSON.parse(pastRules);
-    pastRules.forEach(function(el){
+// Create rule front-end given existing rules
+// var rulesList = document.getElementById("rulesList").value;
+//     rulesList.forEach(function(el){
+//         var ruleElt = new ruleBlock(el);
+//         ruleElt.addToPage();
+// });
+
+$.get( base_url + "/rules/" + dept, function( data ) { 
+    var rulesArray = data['rules']
+    console.log("rulesArray: ", rulesArray);
+    rulesArray.forEach(function(course){
         var ruleElt = new ruleBlock(el);
         ruleElt.addToPage();
-       
+    });
 });
+
+
