@@ -37,7 +37,8 @@ def deptPage(deptName):
     conn = dbi.connect()
     depts = get_abbrev(conn)
     courses = get_courses(conn)
-    rules = get_rules(conn, deptName)
+    rulesTups = get_rules(conn, deptName)
+    rules = [json.loads(i[0])[0] for i in rulesTups]
     return render_template('rules.html', page_title='Add Rules',
                            depts = depts,
                            courses = courses,

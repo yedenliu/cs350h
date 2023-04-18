@@ -30,7 +30,6 @@ app.config['TRAP_BAD_REQUEST_ERRORS'] = True
 ################################################################################
 @app.route('/', methods=['GET','POST'])
 def index():
-    # conn = pymysql.connect(read_default_file='~/.my.cnf', database='wmdb')
     conn = dbi.connect()
     if request.method == 'GET':
         depts = get_depts(conn)
@@ -48,7 +47,11 @@ def index():
                           " doesn't exist in our database")
                 # if course does exist
                 insert_data(conn, dept, cnum)
+        
+        # List of top 5 matched department names
         results = major_match(conn)
+
+        # 
         course_matches = matched_courses(conn)        
         delete_form_data(conn)
         

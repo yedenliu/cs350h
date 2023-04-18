@@ -1,4 +1,9 @@
 import cs304dbi as dbi
+import ast
+
+import logging 
+logging.basicConfig(filename='/students/majormatch/app.log', filemode='w', format='%(levelname)s:%(message)s', level=logging.DEBUG)
+
 
 '''
 1. Accept the dept abbr and course number from form data --> put into DB 
@@ -25,7 +30,13 @@ def get_rules(conn, dept):
                 from jsons 
                 where dept = %s
             '''
-    curs.execute(sql, [dept])
+    curs.execute(sql, dept)
+    # rulesTups = curs.fetchall()
+    # logging.debug('TESTING RULES')
+    # logging.debug(type(rulesTups))
+    # rulesList = [i[0][0][0] for i in curs]
+    # logging.debug(rulesList)
+    # rules = ast.literal_eval(rulesList)
     return curs.fetchall()
 
 def find_cid(conn, dept, cnum):
