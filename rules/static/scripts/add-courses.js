@@ -153,9 +153,13 @@ function formatRules (){
 // });
 
 $.get( base_url + "/rules/" + dept, function( data ) { 
-    var rulesArray = data['rules']
+    rulesList = data['rules']
     console.log("rulesArray: ", rulesArray);
+<<<<<<< HEAD
     rulesArray.forEach(function(course){
+=======
+    rulesList.forEach(function(course){
+>>>>>>> ddbbff9e807b41bdd811fdf810a05194ffb2b42e
         var ruleElt = new ruleBlock(course);
         ruleElt.addToPage();
     });
