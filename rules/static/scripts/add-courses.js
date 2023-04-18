@@ -153,10 +153,10 @@ function formatRules (){
 // });
 
 $.get( base_url + "/rules/" + dept, function( data ) { 
-    var rulesArray = data['rules']
+    rulesList = data['rules']
     console.log("rulesArray: ", rulesArray);
-    rulesArray.forEach(function(course){
-        var ruleElt = new ruleBlock(el);
+    rulesList.forEach(function(course){
+        var ruleElt = new ruleBlock(course);
         ruleElt.addToPage();
     });
 });
