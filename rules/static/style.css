@@ -153,8 +153,10 @@ button {
     flex-direction: row;
     align-items: center;
     gap: 8px;
-    width: max-content;
+    /* width: max-content; */
     border-radius: 4px;
+    width: auto;
+    justify-content: space-between;
 }
 
 .course-chip div {
@@ -176,7 +178,8 @@ button {
     display: grid;
     /* grid-template-columns: repeat(auto-fill,minmax(100px, 1fr)); */
     /* column-gap: 8px; */
-    grid-template-columns: auto auto auto auto;
+    /* grid-template-columns: auto auto auto auto; */
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     row-gap: 8px;
     column-gap: 8px;
 }
@@ -193,6 +196,22 @@ button {
     gap: 24px;
 }
 
+.rules-chip-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rules-remove {
+    font-weight: 500;
+    color: #002776;
+    cursor: pointer;
+}
+
+.rules-remove:hover {
+    color: #214ea9
+}
 /* #added-courses-section > * {
     flex: 1 1 100px;
 }  */
@@ -211,3 +230,4 @@ button {
     width: 65%;
     justify-content: flex-end;
 }
+

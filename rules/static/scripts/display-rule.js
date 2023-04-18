@@ -16,13 +16,27 @@ class ruleBlock {
         
         // Create container to hold chips
         var $courseContainer = $('<div>', {
-            'class':'rules-chip-container',
+            'class':'rules-chip-container'
         }); 
 
+        // Create title container 
+        var $headerContainer = $('<div>', {
+            'class': 'rules-chip-header'
+        })
+        
         // Create title for container
         var $title = $('<h3>');
         $title.html(this.desc);
-        $container.append($title);
+        $headerContainer.append($title);
+
+        // Create remove button
+        var $remove = $('<h3>', {
+            'class': 'rules-remove'
+        });
+        $remove.html('Remove');
+        $headerContainer.append($remove);
+
+        $container.append($headerContainer);
 
         // Create list of components
         if (this.rulesList.length > 8) { // If this has more than 8 classes...
@@ -46,6 +60,10 @@ class ruleBlock {
             $container.append($courseContainer);  
         }
 
+        $($container).on("click", '.rules-remove', function(event) {
+           this.removeRule();
+        });
+
         this.elt = $container;
     }
 
@@ -53,7 +71,9 @@ class ruleBlock {
         $("#rule-display-container").append(this.elt);
      }
 
-    // remove() {
-    //     $(this.elt).remove();
-    // }
+    removeRule() {
+        console.log("Remove rule !!!");
+        $(this.elt).remove();
+        return this.desc
+    }
 }
