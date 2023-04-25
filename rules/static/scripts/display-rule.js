@@ -7,7 +7,7 @@ class ruleBlock {
         
         console.log("desc: ", this.desc);
         console.log("num: ", this.num);
-        console.log("rulesList: ", this.rulesList);
+        console.log("courseList: ", this.courseList);
 
         // Create parent container
         var $container = $('<div>', {
@@ -40,7 +40,7 @@ class ruleBlock {
         $container.append($headerContainer);
 
         // Create list of components
-        if (this.rulesList.length > 8) { // If this has more than 8 classes...
+        if (this.courseList.length > 8) { // If this has more than 8 classes...
             for (let i = 0; i < 8; i++) {
                 var chip = new courseChip(this.courseList[i], false);
                 $courseContainer.append(chip.getComponent());
@@ -54,7 +54,7 @@ class ruleBlock {
         }
         else {
             console.log("Less than 8");
-            this.rulesList.forEach(function(course){
+            this.courseList.forEach(function(course){
                 var chip = new courseChip(course, false);
                 $courseContainer.append(chip.getComponent());
             }); 
@@ -65,7 +65,7 @@ class ruleBlock {
            this.removeRule();
            // Update rules var
            rulesList = rulesList.filter(item => item !== ruleDict);
-           console.log("rulesList in display-ruleL ", rulesList);
+           console.log("rulesList in display-rule: ", rulesList);
         });
 
         this.elt = $container;

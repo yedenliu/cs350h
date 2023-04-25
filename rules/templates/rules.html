@@ -84,24 +84,7 @@
         </section>
         <div class="divider"></div>
         <section id="rule-display">
-            <div id="debug"></div>
-            <div>
-                <h2>Existing rules</h2>
-
-                <input type="hidden" id="pastRules" value="{{rules}}">
-
-                {{rules}}
-                {% for r in rules %}
-                <div class="past-rule">
-                <p>Rule Description: <span >{{ r.description }}</span></p>
-                <p>Units required: {{ r.op }}</p>
-                <p>Courses counted: {{ r.arg }}</p>
-                </div>
-                <br>
-
-                {% endfor %}
-            </div>
-            
+            <h2>Existing rules</h2>
             
             <div id="rule-display-container">
 
