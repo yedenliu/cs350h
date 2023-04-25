@@ -3,7 +3,7 @@ class ruleBlock {
         this.dict = ruleDict;
         this.desc = ruleDict['description'];
         this.num = ruleDict['op'];
-        this.rulesList = ruleDict['arg'];
+        this.courseList = ruleDict['arg'];
         
         console.log("desc: ", this.desc);
         console.log("num: ", this.num);
@@ -42,7 +42,7 @@ class ruleBlock {
         // Create list of components
         if (this.rulesList.length > 8) { // If this has more than 8 classes...
             for (let i = 0; i < 8; i++) {
-                var chip = new courseChip(this.rulesList[i], false);
+                var chip = new courseChip(this.courseList[i], false);
                 $courseContainer.append(chip.getComponent());
             } 
             
