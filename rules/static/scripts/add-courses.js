@@ -154,7 +154,7 @@ function formatRules (){
 
 $.get( base_url + "/rules/" + dept, function( data ) { 
     rulesList = data['rules']
-    console.log("rulesArray: ", rulesArray);
+    console.log("rulesArray: ", rulesList);
     rulesList.forEach(function(course){
         var ruleElt = new ruleBlock(course);
         ruleElt.addToPage();

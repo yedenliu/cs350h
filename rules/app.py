@@ -80,23 +80,17 @@ def submit(dept):
     Routing function for submitting a major into the database
     '''
     conn = dbi.connect()
-    # logging.debug('TESTING')
-    # logging.debug(request.form.keys())
-    
-    string = request.form['majorJSON']
-    majorJSON = json.loads(str(string))
-    # logging.debug(type(majorJSON))
-    # logging.debug(majorJSON)
-    
-    deptName = majorJSON['deptName']
-    rules = json.dumps(majorJSON['rules'])
-    
-    # logging.debug(deptName)
-    # logging.debug(rules)
 
-    unicodedata.normalize('NFKD', deptName).encode('ascii', 'ignore')
-    logging.debug(type(deptName))
-    logging.debug(type(rules))
+    # Getting rules in form of string that needs to be converted
+    string = request.form['majorJSON']
+
+    # Convert string to JSON
+    majorJSON = json.loads(str(string))
+
+    # Getting deptName and rules from JSON
+    deptName = majorJSON['deptName']
+    deptName = str(deptName)
+    rules = json.dumps(majorJSON['rules'])
     
     add_major(conn, deptName, rules)
     return redirect(url_for('deptPage', deptName = dept))

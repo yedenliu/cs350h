@@ -118,12 +118,11 @@ def add_major(conn, deptName, rules):
             delete from jsons 
             where dept = %s
             '''
-    curs.execute(sql_1, [deptName, rules])
-    conn.commit()
-    
+    # insert rule    
     sql_2 = ''' 
             insert into jsons (dept, rules)
             values (%s, %s)
             '''
+    curs.execute(sql_1, [deptName])
     curs.execute(sql_2, [deptName, rules])
     conn.commit()
