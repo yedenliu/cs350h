@@ -31,15 +31,21 @@ def index():
         deptName = request.form['deptName']
         return redirect(url_for('deptPage', deptName = deptName))
 
-        
-
 @app.route('/<deptName>')
 def deptPage(deptName):
     conn = dbi.connect()
     depts = get_abbrev(conn)
     courses = get_courses(conn)
-    rulesTups = get_rules(conn, deptName)
-    rules = [json.loads(i[0])[0] for i in rulesTups]
+    rules = None
+    if check_rules_exist(conn, deptName)!=0:
+        rulesTups = get_rules(conn, deptName)
+        logging.debug(rulesTups)
+        try: 
+            rules = json.loads(rulesTups[0][0])          
+        except:
+            logging.debug('Prepared query output is weirdly formatted')
+            logging.debug(rulesTups)
+    logging.debug(rules)
     return render_template('rules.html', page_title='Add Rules',
                            depts = depts,
                            courses = courses,
@@ -70,8 +76,16 @@ def getRules(dept):
     Routing function for rules refresh
     '''
     conn = dbi.connect()
-    rulesTups = get_rules(conn, dept)
-    rules = [json.loads(i[0])[0] for i in rulesTups]
+    rules = None
+    if check_rules_exist(conn, dept)!=0:
+        rulesTups = get_rules(conn, dept)
+        logging.debug(rulesTups)
+        try: 
+            rules = json.loads(rulesTups[0][0])          
+        except:
+            logging.debug('Prepared query output is weirdly formatted')
+            logging.debug(rulesTups)
+    logging.debug(rules)
     return jsonify(rules = rules)
 
 @app.route('/submit/<dept>', methods=['POST'])

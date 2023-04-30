@@ -10,8 +10,22 @@ def get_courses(conn):
             '''
     curs.execute(sql)
     courseTups = curs.fetchall()
-    courseList = [i[0] + i[1] for i in courseTups]
+    courseList = [i[0] + ' ' + i[1] for i in courseTups]
     return courseList
+
+def check_rules_exist(conn, dept):
+    '''
+    Checks if rules for a department exist in the database
+    Returns true if exists 
+    '''
+    curs = dbi.cursor(conn)
+    sql =   ''' select count(rules)
+                from jsons 
+                where dept = %s
+            '''
+    curs.execute(sql, [dept])
+    count = curs.fetchone()
+    return count[0]
 
 def get_rules(conn, dept):
     curs = dbi.cursor(conn)
@@ -41,22 +55,6 @@ def check_course_exists(conn, dept, cnum):
             '''
     curs.execute(sql, [dept, cnum])
     return len(curs.fetchall()) > 0
-
-
-def get_dept_courses(conn, abbrev):
-    '''
-    Finds courses given an department abbreviation
-    
-    Param - connection object, department abbreviation 
-    Return - list of courses (in form CS 111)
-    '''
-    curs = dbi.cursor(conn)
-    
-    sql =   ''' select dept, cnum from courses 
-                where dept = %s
-            '''
-    curs.execute(sql, [abbrev])
-    return curs.fetchall()
 
 def get_dept_courses(conn, abbrev):
     '''

@@ -17,26 +17,14 @@
 
     <div id="add-rule-page">
         <section id="add-rule-container">
-            <h1>Add Rule</h1>
+            <h1>Add Courses</h1>
             <div class="form-inputs">
 
                 <div id="requirement-container">
-                    <div>
-                        <div class="tooltip-header">
-                            <label for="rdesc">Requirement Description</label>
-                            <div>(ICON)</div>
-                        </div>
-                        <p class="subheader">This is a short descriptor of the requirement.</p>
-                    </div>
-                    <input type="text" id="rdesc" name="rdesc" placeholder="e.g., Introductory Sequence">
                 </div>
 
                 <div>
-                    <label for="rdesc">How many classes are needed to fulfill this rule?</label>
-                    <input type="text" id="rnum" name="rnum" placeholder="e.g., 3">
-                </div>
-                <div>
-                    <label for="rdesc">What classes count towards this rule</label>
+                    <label for="rdesc">Add courses you’ve taken below</label>
                     <div class="input-button">
                         <input id="add-class" name="add-class" placeholder="e.g., CS 111" list="courses">
                         <datalist id="courses">
@@ -49,30 +37,11 @@
                 </div>
 
                 <div>
-                    <label for="rdesc">Batch add classes</label>
-                    <div class="input-button">
-                        <select name="levels" id="class-levels">
-                            <option value="200">All 200-level</option>
-                            <option value="300">All 300-level</option>
-                          </select>
-                        
-                        <input id="batch-add-dept" name="batch-add-dept" placeholder="Type dept. abbreviation" list="departments">
-                        <datalist id="departments">
-                            {% for d in depts %}
-                            <option value="{{ d }}">
-                            {% endfor %}
-                        </datalist>
-
-                        <button id="batch-add-button">Batch Add</button>
-                    </div>
-                </div>
-
-                <div>
-                    <h3>Courses</h3>
+                    <h3>Your courses</h3>
                     <div id="added-courses-container">
                         <div id="courses-empty-state-container">
-                            <h3>Courses Empty</h3>
-                            <p class="subheader">Your added courses will show up here. Use the form at the top to add classes</p>
+                            <h3>📚 Classes</h3>
+                            <p class="subheader">Classes that you add above will appear here</p>
                         </div>
                         <div id="added-courses-section">
                         </div>
@@ -91,7 +60,6 @@
             </div>
 
         </section>
-
     </div>
 
     <div id="submit-section">
@@ -99,8 +67,6 @@
             <button id="submit-major">Submit</button>
         </div>
     </div>
-
- 
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 

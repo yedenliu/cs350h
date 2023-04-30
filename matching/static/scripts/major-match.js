@@ -68,11 +68,16 @@ function parseMajor(inputJSON, courseList) {
 
     console.log("Student Units / Total Units: ", studentUnits, "/", totalUnits);
     var unitsLeft = totalUnits - studentUnits;
-    if (unitsLieft < 0) {
+    if (unitsLeft < 0) {
         unitsLeft = 0
     }
+    var percentage = studentUnits / totalUnits;
+    if (percentage > 1) {
+        percentage = 1;
+    }
+
     console.log("Units left: ", unitsLeft);
-    return [studentUnits / totalUnits, unitsLeft];
+    return [percentage, unitsLeft];
     }
 
     // #-------------------------------------------------------------------------------
@@ -143,7 +148,7 @@ $("#major-match").on('click', function(event) {
                 
 async function getMajorJSON() {
     var majorList = onlyUnique(userMajors);   
-    for (m of majorList) {
+    for (dept of majorList) {
         await $.get( base_url + "/major-match/" + dept, function( data ) { 
             var majorJSON = data['majorJSON']
             console.log("majorJSON: ", majorJSON);

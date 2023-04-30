@@ -18,10 +18,10 @@
     <div>
         <h1>Select Department</h1>
         <form method="POST" action="{{ url_for('index') }}">
-        <input id="deptName" name="deptName" placeholder="Type dept. abbreviation" list="departments">
+        <input id="deptName" name="deptName" placeholder="Type dept. abbreviation" list="departments" onkeyup="this.value = this.value.toUpperCase();">
             <datalist id="departments">
                 {% for d in depts %}
-                <option value="{{ d }}">
+                <option value="{{ d.upper() }}">
                 {% endfor %}
             </datalist>
         <input type='submit' value='Edit Major'>

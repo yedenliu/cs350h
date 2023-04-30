@@ -31,10 +31,12 @@ app.config['TRAP_BAD_REQUEST_ERRORS'] = True
 @app.route('/', methods=['GET','POST'])
 def index():
     conn = dbi.connect()
+    depts = get_depts(conn)
     if request.method == 'GET':
-        depts = get_depts(conn)
         return render_template('index.html', page_title='Home', depts=depts)
     else:
+        # STEP 1: Create courseList of user's inputted courses
+        courseList = []
         for n in range(0, 32): # range is the n# of total courses they can input
             dept = request.form.get('dept-'+str(n))
             cnum = request.form.get('cnum-'+str(n))
@@ -45,58 +47,31 @@ def index():
                 if not check_course_exists(conn, dept, cnum):
                     flash(str(dept) + ' ' + str(cnum) + 
                           " doesn't exist in our database")
+                
                 # if course does exist
-                insert_data(conn, dept, cnum)
+                courseList.append(dept + ' ' + cnum)
         
-        # List of top 5 matched department names
-        results = major_match(conn)
-
-        # 
-        course_matches = matched_courses(conn)        
-        delete_form_data(conn)
+        # STEP 2: Get progress of each major
+        progress_list = []
+        for d in depts: # For each dept, get the rules
+            rules = None
+            if check_rules_exist(conn, d)!=0:
+                rulesTups = get_rules(conn, d)
+                # logging.debug(rulesTups)
+                try: 
+                    rules = json.loads(rulesTups[0][0])          
+                except:
+                    logging.debug('Prepared query output is weirdly formatted')
+                    logging.debug(rulesTups)
+            # logging.debug(rules)
         
-        # get all the courses in each department
-        dept_courses = (
-        [(get_dept_courses(conn, results[i][2])) for i in range(len(results))]
-        )
-
-        courses_to_take_dict = {
-            results[i][0]: dept_courses[i] for i in range(len(results))
-        }
-
-        # find the % of courses that have been taken for each matched major
-        percentage = [
-            format((results[i][1] / len(dept_courses[i])), '.0') 
-            for i in range(len(results))
-            ]
-        p = [(int((float(x)*100)),'') for x in percentage]
-        # results = (major, 
-        #            count matched courses, 
-        #            dept_id, percent courses taken,
-        #            empty string)
-        results = [results[i]+ tuple(p[i]) for i in range(len(results))]
-
-        # put the courses with the majors they fulfill 
-        courses_taken_dict = {
-            course_matches[i][1]:[] for i in range(len(course_matches))
-        }
-        for i in range(len(course_matches)):
-            courses_taken_dict[course_matches[i][1]].append(
-                course_matches[i][0]
-            )
-
-        # (-) courses taken from dept courses and put still needed into dict
-        for major in courses_to_take_dict:
-            # get the taken courses and subtract from the dept courses
-            courses_to_take_dict[major] = list(
-                set(courses_to_take_dict[major])-set(courses_taken_dict[major])
-                )
-        return render_template('results.html',
-                                page_title='Results',
-                                results = results,
-                                course_matches = course_matches,
-                                courses_to_take_dict = courses_to_take_dict
-                                )
+            major_progress = parseMajor(d, rules, courseList)
+            progress_list.append(major_progress)
+        
+        progress_list.sort(key=lambda x: x[1])
+        # What is in each major's list: [dept, progress, unitsLeft, rulesCompleted, rulesLeft]
+        matchList = progress_list[:2]
+        return jsonify(matchList = matchList)
 
 @app.route('/contact/')
 def contact():
